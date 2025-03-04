@@ -3,13 +3,7 @@
 import { redirect } from "next/navigation";
 import z from "zod";
 import User from "../models/User";
-
-export type FormResponse = {
-  errors: {
-    email?: string[] | undefined;
-    password?: string[] | undefined;
-  };
-};
+import { FormResponse } from "../definitions/formResponse";
 
 const userSchema = z.object({
   email: z.string().email(),
