@@ -55,8 +55,8 @@ export default function Register() {
           </button>
         </div>
 
-        <div>
-          <Link href="/login" className="text-blue-500">Login</Link>
+        <div className="text-center">
+          Have account already? <Link href="/login" className="text-blue-500">Login</Link>
         </div>
       </form>
     </>
