@@ -13,6 +13,11 @@ class User {
     console.log(newUser);
     return newUser;
   }
+
+  static async findAll() {
+    const users = await collection.find().toArray();
+    return users;
+  }
 }
 
 export default User;

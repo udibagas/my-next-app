@@ -1,7 +1,7 @@
-import UserModel from "@/app/models/UserModel"
+import User from "@/app/models/User"
 
 export default async function UserPage() {
-  const users = await UserModel.findAll()
+  const users = await User.findAll()
 
   return (
     <div className="text-center p-8">
