@@ -1,5 +1,6 @@
 'use client'
 import { register } from "@/app/actions/auth";
+import Link from "next/link";
 import { useActionState, useState } from "react";
 
 const initialState = {
@@ -19,7 +20,7 @@ export default function Register() {
     <>
       <form
         action={formAction}
-        className="p-8 bg-white w-[320px] rounded-md shadow-md flex flex-col gap-8"
+        className="p-8 bg-white w-[320px] rounded-md shadow-md flex flex-col gap-6"
       >
         <h1 className="text-3xl">Register</h1>
 
@@ -32,7 +33,7 @@ export default function Register() {
             name="email"
             className="w-full border border-gray-300 rounded-md p-2"
           />
-          {<div className="text-red-500 tex-sm mt-2">{state.errors.email?.join(", ")}</div>}
+          {<div className="text-red-500 tex-sm mt-2">{state?.errors.email?.join(", ")}</div>}
         </div>
 
         <div>
@@ -45,13 +46,17 @@ export default function Register() {
             name="password"
             className="w-full border border-gray-300 rounded-md p-2"
           />
-          {<div className="text-red-500 tex-sm mt-2">{state.errors.password?.join(", ")}</div>}
+          {<div className="text-red-500 tex-sm mt-2">{state?.errors.password?.join(", ")}</div>}
         </div>
 
         <div>
-          <button disabled={pending} className="w-full bg-blue-500 text-white rounded-md p-2 mt-4">
-            Login
+          <button disabled={pending} className="w-full bg-blue-500 text-white rounded-md p-2 mt-4 cursor-pointer">
+            Register
           </button>
+        </div>
+
+        <div className="text-center">
+          <Link href="/login" className="text-blue-500">Login</Link>
         </div>
       </form>
     </>

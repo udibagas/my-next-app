@@ -1,7 +1,8 @@
-import UserModel from "@/app/models/UserModel"
+import ModelUser from "@/app/models/ModelUser"
 
 export default async function UserPage() {
-  const users = await UserModel.findAll()
+  const users = await ModelUser.findAll()
+  console.log(users)
 
   return (
     <div className="text-center p-8">
@@ -9,7 +10,7 @@ export default async function UserPage() {
 
       <ul>
         {users.map((user) => (
-          <li key={user.id}>
+          <li key={user._id.toString()}>
             {user.email}
           </li>
         ))}
