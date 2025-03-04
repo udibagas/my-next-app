@@ -19,6 +19,8 @@ export default function RootLayout({
         <Link href="/about">About</Link>
         <Link href="/contact">Contact</Link>
         <Link href="/users">Users</Link>
+        <Link href="/products">Products</Link>
+        <Link href="/todos">Todos</Link>
       </header>
       {children}
     </>

@@ -1,5 +1,6 @@
 'use client'
 import { register } from "@/app/actions/auth";
+import Link from "next/link";
 import { useActionState, useState } from "react";
 
 const initialState = {
@@ -50,8 +51,12 @@ export default function Register() {
 
         <div>
           <button disabled={pending} className="w-full bg-blue-500 text-white rounded-md p-2 mt-4">
-            Login
+            {pending ? "Saving data..." : "Register"}
           </button>
+        </div>
+
+        <div>
+          <Link href="/login" className="text-blue-500">Login</Link>
         </div>
       </form>
     </>

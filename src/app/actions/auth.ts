@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import z from "zod";
-import UserModel from "../models/UserModel";
+import User from "../models/User";
 
 export type FormResponse = {
   errors: {
@@ -28,6 +28,6 @@ export async function register(prevState: FormResponse, formData: FormData) {
     };
   }
 
-  await UserModel.create({ email, password });
+  await User.create({ email, password });
   redirect("/login");
 }

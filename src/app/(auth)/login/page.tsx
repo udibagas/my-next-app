@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Login() {
   return (
     <form className="p-8 bg-white w-[320px] rounded-md shadow-md flex flex-col gap-8">
@@ -15,6 +17,10 @@ export default function Login() {
 
       <div>
         <button className="w-full bg-blue-500 text-white rounded-md p-2 mt-4">Login</button>
+      </div>
+
+      <div>
+        <Link href="/register" className="text-blue-500">Login</Link>
       </div>
     </form>
   )
