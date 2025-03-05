@@ -12,7 +12,6 @@ export default async function middleware(req: NextRequest) {
     }
 
     const payload = await decrypt(session);
-    console.log(payload);
     const response = NextResponse.next();
     response.cookies.set("userId", payload._id as string);
     return response;
