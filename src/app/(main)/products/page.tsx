@@ -11,7 +11,7 @@ export default function ProductPage() {
   const [loading, setLoading] = useState(true)
 
   useState(() => {
-    fetch(process.env.API_URL + '/api/products')
+    fetch('/api/products')
       .then(res => res.json())
       .then(data => setProducts(data))
       .finally(() => setLoading(false))

@@ -20,7 +20,7 @@ export default function TodoPage() {
     e.preventDefault();
     console.log(title, deadline);
 
-    fetch("http://localhost:3000/api/todos", {
+    fetch("/api/todos", {
       method: "POST",
       body: JSON.stringify({ title, deadline }),
     })
@@ -46,7 +46,7 @@ export default function TodoPage() {
   }
 
   function handleDelete(id: ObjectId | undefined) {
-    fetch(`http://localhost:3000/api/todos/${id?.toString()}`, {
+    fetch(`/api/todos/${id?.toString()}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -66,7 +66,7 @@ export default function TodoPage() {
   }
 
   function handleUpdate(id: ObjectId | undefined) {
-    fetch(`http://localhost:3000/api/todos/${id?.toString()}`, {
+    fetch(`/api/todos/${id?.toString()}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -86,7 +86,7 @@ export default function TodoPage() {
   }
 
   function fetchTodos() {
-    fetch("http://localhost:3000/api/todos")
+    fetch("/api/todos")
       .then((res) => res.json())
       .then((data) => setTodos(data))
       .catch((err) => console.log(err))
@@ -95,7 +95,7 @@ export default function TodoPage() {
 
   useEffect(() => {
     setLoading(true);
-    fetch("http://localhost:3000/api/todos")
+    fetch("/api/todos")
       .then((res) => res.json())
       .then((data) => setTodos(data))
       .catch((err) => console.log(err))
