@@ -12,4 +12,5 @@ export interface TodoType {
   title: string;
   deadline: string;
   status?: boolean;
+  userId: ObjectId;
 }

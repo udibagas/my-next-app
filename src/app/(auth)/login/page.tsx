@@ -40,7 +40,7 @@ export default function Login() {
           disabled={pending}
           className="w-full bg-blue-500 text-white rounded-md p-2 mt-4"
         >
-          Login
+          {pending ? "Logging in..." : "Login"}
         </button>
       </div>
 

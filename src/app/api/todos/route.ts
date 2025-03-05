@@ -1,4 +1,5 @@
 import Todo from "@/app/models/Todo";
+import { NextRequest } from "next/server";
 import { z } from "zod";
 
 const schema = z.object({
@@ -6,14 +7,19 @@ const schema = z.object({
   deadline: z.string().nonempty(),
 });
 
-export async function GET() {
-  const todos = await Todo.findAll();
+export async function GET(req: NextRequest) {
+  const userId = req.cookies.get("userId")?.value;
+
+  if (!userId) {
+    return Response.json([], { status: 200 });
+  }
+
+  const todos = await Todo.findAllByUserid(userId!);
   return Response.json(todos, { status: 200 });
 }
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   const data = await req.json();
-
   const vaidationResult = schema.safeParse(data);
 
   if (!vaidationResult.success) {
@@ -22,6 +28,7 @@ export async function POST(req: Request) {
     });
   }
 
+  data.userId = req.cookies.get("userId")?.value;
   const result = await Todo.create(data);
   return Response.json(result, { status: 201 });
 }

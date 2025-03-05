@@ -14,71 +14,75 @@ export default function TodoPage() {
   const [error, setError] = useState<{
     title?: string[];
     deadline?: string[];
-  }>({})
+  }>({});
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    console.log(title, deadline)
+    e.preventDefault();
+    console.log(title, deadline);
 
-    fetch('http://localhost:3000/api/todos', {
-      method: 'POST',
-      body: JSON.stringify({ title, deadline })
+    fetch("http://localhost:3000/api/todos", {
+      method: "POST",
+      body: JSON.stringify({ title, deadline }),
     })
       .then(async (res) => {
-        const json = await res.json()
+        const json = await res.json();
 
         if (!res.ok) {
-          throw json
+          throw json;
         }
 
-        return json
+        return json;
       })
-      .then(data => {
-        setTodos([data, ...todos])
-        setTitle('')
-        setDeadline('')
-        setError({})
+      .then((data) => {
+        setTodos([data, ...todos]);
+        setTitle("");
+        setDeadline("");
+        setError({});
       })
-      .catch(err => {
-        console.log(err)
-        setError(err)
-      })
+      .catch((err) => {
+        console.log(err);
+        setError(err);
+      });
   }
 
   function handleDelete(id: ObjectId | undefined) {
     fetch(`http://localhost:3000/api/todos/${id?.toString()}`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-    }).then(res => {
-      if (!res.ok) {
-        throw new Error('Failed to delete')
-      }
-
-      fetchTodos()
-    }).catch(err => {
-      alert(err.message)
-      console.log(err)
     })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to delete");
+        }
+
+        fetchTodos();
+      })
+      .catch((err) => {
+        alert(err.message);
+        console.log(err);
+      });
   }
 
   function handleUpdate(id: ObjectId | undefined) {
     fetch(`http://localhost:3000/api/todos/${id?.toString()}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-    }).then(res => {
-      if (!res.ok) {
-        throw new Error('Failed to delete')
-      }
-
-      fetchTodos()
-    }).catch(err => {
-      alert(err.message)
-      console.log(err)
     })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to delete");
+        }
+
+        fetchTodos();
+      })
+      .catch((err) => {
+        alert(err.message);
+        console.log(err);
+      });
   }
 
   function fetchTodos() {
@@ -102,7 +106,10 @@ export default function TodoPage() {
     <div className="w-2/3 my-8 m-auto">
       <h1 className="text-3xl">Todos</h1>
 
-      <form onSubmit={handleSubmit} className="w-[400px] my-8 flex flex-col gap-6">
+      <form
+        onSubmit={handleSubmit}
+        className="w-[400px] my-8 flex flex-col gap-6"
+      >
         <div>
           <label htmlFor="title">Title</label>
           <input
@@ -114,7 +121,11 @@ export default function TodoPage() {
             placeholder="Title"
             className="w-full border border-gray-300 rounded-md p-2"
           />
-          {<div className="text-red-500 tex-sm mt-2">{error.title?.join(", ")}</div>}
+          {
+            <div className="text-red-500 tex-sm mt-2">
+              {error.title?.join(", ")}
+            </div>
+          }
         </div>
 
         <div>
@@ -128,7 +139,11 @@ export default function TodoPage() {
             placeholder="Title"
             className="w-full border border-gray-300 rounded-md p-2"
           />
-          {<div className="text-red-500 tex-sm mt-2">{error.deadline?.join(", ")}</div>}
+          {
+            <div className="text-red-500 tex-sm mt-2">
+              {error.deadline?.join(", ")}
+            </div>
+          }
         </div>
 
         <div>
@@ -166,9 +181,23 @@ export default function TodoPage() {
                 <td className="py-2 px-4 border-b border-gray-300">
                   {todo.status ? "Done" : "Not done"}
                 </td>
-                <td className="text-center">
-                  {todo.status && <button onClick={() => handleDelete(todo._id)} className="bg-red-500 text-white py-2 px-4">Delete</button>}
-                  {!todo.status && <button onClick={() => handleUpdate(todo._id)} className="bg-green-500 text-white py-2 px-4">Done</button>}
+                <td className="py-2 px-4 border-b border-gray-300 text-center">
+                  {todo.status && (
+                    <button
+                      onClick={() => handleDelete(todo._id)}
+                      className="text-red-500 cursor-pointer"
+                    >
+                      Delete
+                    </button>
+                  )}
+                  {!todo.status && (
+                    <button
+                      onClick={() => handleUpdate(todo._id)}
+                      className="text-green-500 cursor-pointer"
+                    >
+                      Done
+                    </button>
+                  )}
                 </td>
               </tr>
             ))}

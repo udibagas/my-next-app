@@ -21,7 +21,7 @@ export default function RootLayout({
         <Link href="/contact">Contact</Link>
         <Link href="/users">Users</Link>
         <Link href="/products">Products</Link>
-        <Link href="/todos"></Link>
+        <Link href="/todos">Todos</Link>
 
         <LogoutButton />
 
