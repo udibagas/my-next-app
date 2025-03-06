@@ -1,4 +1,5 @@
 import Todo from "@/app/models/Todo";
+import { revalidatePath } from "next/cache";
 import { NextRequest } from "next/server";
 
 export async function DELETE(
@@ -15,6 +16,7 @@ export async function DELETE(
   }
 
   await Todo.remove(id);
+  revalidatePath("/api/todos");
   return Response.json({ message: "Todo deleted" }, { status: 200 });
 }
 
@@ -31,5 +33,6 @@ export async function PUT(
   }
 
   await Todo.updateStatus(id);
+  revalidatePath("/api/todos");
   return Response.json({ message: "Todo updated" }, { status: 200 });
 }

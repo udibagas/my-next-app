@@ -1,4 +1,5 @@
 import Todo from "@/app/models/Todo";
+import { revalidatePath } from "next/cache";
 import { NextRequest } from "next/server";
 import { z } from "zod";
 
@@ -30,5 +31,6 @@ export async function POST(req: NextRequest) {
 
   data.userId = req.cookies.get("userId")?.value;
   const result = await Todo.create(data);
+  revalidatePath("/api/todos");
   return Response.json(result, { status: 201 });
 }
